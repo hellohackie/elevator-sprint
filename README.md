@@ -32,3 +32,5 @@ Elevator system to show how elevator works
 - Note that, this dosent not mimic real world, when you would have a total of 10 buttons for 5 elevators ( one for up and one for down)
 
 - Once the elevator reaches its called point, then based on what floor is requested, it moves either up or down.
+
+> Reference: Thanks to [ngautam0](https://github.com/ngautam0) for [elevator repo](https://github.com/ngautam0/elevator-system)
