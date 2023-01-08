@@ -1,3 +1,5 @@
+import time
+
 class ElevatorUtil:
   """
   ElevatorUtil: class that provides functionality to smoothly process task for elevator 
@@ -66,6 +68,7 @@ class ElevatorUtil:
 
     # process each floor, select lift which is closest
     print("Active Floors => ", activeFloors)
+    time.sleep(0.3)
     for queueCounter, floor in enumerate(activeFloors):
       distance = []
       # find optimal lift for each floor
@@ -92,16 +95,21 @@ class ElevatorUtil:
 
       # print information on screen
       print("##################################################")
-      print("Lift number: ", elevatorSelected.liftNumber)
+      print("Lift number: ", elevatorSelected.liftNumber+1)
+      time.sleep(0.1)
       print("On floor: ", elevatorSelected.onFloor)
+      time.sleep(0.1)
       print("Service list: ", elevatorSelected.serviceList)
+      time.sleep(0.1)
       print("Direction: ", elevatorSelected.direction)
+      time.sleep(0.3)
 
     # process request for each elevator
     for elevator in self.elevators:
       if elevator.isSelected:
         print("-------------------------------------------------")
-        print("\t\t\tLift - {}".format(elevator.liftNumber))
+        print("\t\t\tLift - {}".format(elevator.liftNumber+1))
         print("-------------------------------------------------")
         elevator.processRequest()
+        time.sleep(0.3)
 

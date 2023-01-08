@@ -1,4 +1,26 @@
 from controller.ElevatorController import ElevatorController
+import time
+
+def setup():
+  """
+  setup - It make sure about required package to be installed
+
+    if any package is missing it will initiate a pip subprocess
+    And it will maintain its dependency in system.
+  """
+  import sys
+  import subprocess
+  import pkg_resources
+
+  required  = {'numpy'} 
+  installed = {pkg.key for pkg in pkg_resources.working_set}
+  missing   = required - installed
+
+  if missing:
+      # implement pip as a subprocess:
+      print(missing)
+      subprocess.check_call([sys.executable, '-m', 'pip', 'install', *missing])
+
 
 def run():
   """
@@ -42,6 +64,14 @@ def run():
   # process request
   elevatorController.processRequest(activeFloors)
 
+  # printing final message
+  time.sleep(1)
+  print("~~~~~~~~~~~~~~~~~~~~(;)~~~~~~~~~~~~~~~~~~~~")
+  print("System is now idle. Going on maintenance mode!!!")
+  print("~~~~~~~~~~~~~~~~~~~~(;)~~~~~~~~~~~~~~~~~~~~")
+  time.sleep(1)
+
 
 if __name__ == '__main__':
+  setup()
   run()

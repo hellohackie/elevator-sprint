@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 class Elevator:
   """
@@ -33,19 +34,24 @@ class Elevator:
 
   # prints the current status
   def currentStatus(self):
-    print("lift {} is currently at floor {}".format(self.liftNumber, self.onFloor))
-    print("lift {} running status {}".format(self.liftNumber, self.isRunning))
+    time.sleep(0.2)
+    print("lift {} is currently at floor {}".format(self.liftNumber+1, self.onFloor))
+    time.sleep(0.2)
+    print("lift {} running status {}".format(self.liftNumber+1, self.isRunning))
+    time.sleep(0.2)
   
 
   # open door
   def openDoor(self):
-    print("lift {} door opening".format(self.liftNumber))
+    print("lift {} door opening".format(self.liftNumber+1))
+    time.sleep(0.5)
     self.doorOpen = True
   
 
   # close door
   def closeDoor(self):
-    print("lift {} door closing".format(self.liftNumber))
+    print("lift {} door closing".format(self.liftNumber+1))
+    time.sleep(0.5)
     self.doorOpen = False
   
 
