@@ -50,4 +50,58 @@ class ElevatorUtil:
     except Exception as e:
       print(e)
       return e
+
+
+  def processRequest(self, activeFloors):
+    """
+    processRequest: method to select lift & proces request
+    """
+
+    # unique set of active floors
+    activeFloors = list(set(activeFloors))
+    activeFloors.sort()
+    self.activeFloors = activeFloors
+
+    print("Matching Floor Request with Elevator!!")
+
+    # process each floor, select lift which is closest
+    print("Active Floors => ", activeFloors)
+    for queueCounter, floor in enumerate(activeFloors):
+      distance = []
+      # find optimal lift for each floor
+      for elevator in self.elevators:
+        # if it's not already selected
+        if not elevator.isSelected:
+          distance.append(abs(elevator.onFloor - floor))
+        else:
+          distance.append(999)
       
+      queueCounter = queueCounter % len(self.requestQueue)
+      # find the selected lift
+      selectedLift = distance.index(min(distance))
+      elevatorSelected = self.elevators[selectedLift]
+
+      # assign service queue
+      elevatorSelected.serviceList = [floor] + self.requestQueue[queueCounter]
+
+      # set direction
+      elevatorSelected.direction = 1 if elevatorSelected.onFloor <= floor else -1
+
+      # mark as selected
+      elevatorSelected.isSelected = True
+
+      # print information on screen
+      print("##################################################")
+      print("Lift number: ", elevatorSelected.liftNumber)
+      print("On floor: ", elevatorSelected.onFloor)
+      print("Service list: ", elevatorSelected.serviceList)
+      print("Direction: ", elevatorSelected.direction)
+
+    # process request for each elevator
+    for elevator in self.elevators:
+      if elevator.isSelected:
+        print("-------------------------------------------------")
+        print("\t\t\tLift - {}".format(elevator.liftNumber))
+        print("-------------------------------------------------")
+        elevator.processRequest()
+

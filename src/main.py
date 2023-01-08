@@ -1,3 +1,5 @@
+from controller.ElevatorController import ElevatorController
+
 def run():
   """
     Run - It takes a total of 6 input.
@@ -15,6 +17,31 @@ def run():
       3. each floor has a single button to call lift.
       4. each lift individually based on its service queue decides weather to go up or down
     """
+
+    # floors on which the button has been pressed in this sequence
+  activeFloors = [5, -2, 7, 9, 10, 12, -1]
+
+  # default posistions of lifts, as of now we have got 5 lifts in place
+  liftPositions = [9, 10, 5, 0, 4]
+
+  # noOfLifts, floorMin, floorMax = initializeSystem
+  noOfLifts, floorMin, floorMax = 5, -4, 20
+
+  # request for each elevator
+  requestEach = [
+    [-3, 12, 8, 6, 4, 0, 5],
+    [-3, 0, 5],
+    [4, 0, 5],
+    [8, 6, 4, 0, 5],
+    [2, 4, 8, 10, 12]
+  ]
+
+  # create the elevator system
+  elevatorController = ElevatorController(noOfLifts, floorMin, floorMax, requestEach, liftPositions)
+
+  # process request
+  elevatorController.processRequest(activeFloors)
+
 
 if __name__ == '__main__':
   run()
